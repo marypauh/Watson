@@ -1,0 +1,10 @@
+---
+applications:
+- instances: 1
+  timeout: 180
+  name: 2018112985progra
+  buildpack: liberty-for-java
+  path: ./target/WatsonAssistantChat-0.0.1.war
+  memory: 256M
+  domain: mybluemix.net
+  host: 2018112985progra
