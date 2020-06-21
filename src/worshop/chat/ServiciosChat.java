@@ -51,25 +51,6 @@ public class ServiciosChat {
 			cifrador.setListParams(parametros); 
 		}
 		 
-		
-		/*public static void verificarTipo(Cifrador cifrador, CifradorFactory factory, String tipoF) {
-			if (tipoF != null) {
-				try {
-					cifrador = factory.crearCifrador(tipoF);
-				} catch (InstantiationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			
-		}
-	  */
 }
 
 
