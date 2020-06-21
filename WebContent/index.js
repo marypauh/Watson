@@ -19,7 +19,7 @@ class App extends React.Component {
 	        })
     	
         var ctxStr = JSON.stringify(this.state.ctx);
-    	fetch(`https://2018112985progra.mybluemix.net/chatbot/chatservice/?conversationMsg=${encodeURIComponent(text)}&conversationCtx=${encodeURIComponent(ctxStr)}`)
+    	fetch(`http://localhost:9080/WatsonAssistantChat/chatbot/chatservice/?conversationMsg=${encodeURIComponent(text)}&conversationCtx=${encodeURIComponent(ctxStr)}`)
         .then((response) => {
           return response.json()
         })
@@ -93,7 +93,7 @@ class SendMessageForm extends React.Component {
                 <input
                     onChange={this.handleChange}
                     value={this.state.message}
-                    placeholder="Type your message and hit ENTER"
+                    placeholder="Escriba su respuesta y presione ENTER"
                     type="text" />
             </form>
         )
