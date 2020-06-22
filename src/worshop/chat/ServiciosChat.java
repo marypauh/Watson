@@ -14,6 +14,10 @@ public class ServiciosChat {
 	static Context cont;
 	static ArrayList<String> parametros = new ArrayList<String>();
 	static String valorTipo;
+	static String parametro;
+	static String accion;
+	static String textoRespuesta;
+	static String textoLISTO;
 	
 	public static String determinarHora() {
 		int hora = obtenerHora();
@@ -50,9 +54,11 @@ public class ServiciosChat {
 	}
 
 		public static void agregarParam(Cifrador cifrador, String respuesta) {
-			//respuesta.toLowerCase();
+			//if (validarParametro() == true) {
 			parametros.add(respuesta);
+			System.out.println("Se ha agregado el parametro: " + parametros.toString());
 			cifrador.setListParams(parametros); 
+			//}
 		}
 		
 		
@@ -64,9 +70,28 @@ public class ServiciosChat {
 			System.out.println("Contexto: " +cont);
 		}
 		
-		public static void agregarParametro(String pTexto) {
+		public static void agregarTipo(String pTexto) {
 			valorTipo = pTexto;
 		}
+		
+		public static boolean validarParametro() {
+			if (parametros.size() > 1 ) {
+			return false;
+			} else {
+			return true;
+			}
+			
+		}
+		
+		 public static String realizarAccion(Cifrador pCifrador) {
+			 System.out.println(accion);
+		    if(accion.equals("codificar")) {
+		    	return pCifrador.codificar(ServiciosChat.textoRespuesta);
+		    } else {
+		    	return pCifrador.decodificar(ServiciosChat.textoRespuesta);
+		    }
+		    	
+		  }
 }
 
 

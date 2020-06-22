@@ -3,7 +3,7 @@ package modelo;
 import java.util.ArrayList;
 
 public class Cesar extends Sustitucion{
-	private int desplazamiento;
+	public int desplazamiento;
 
 	@Override
 	public ArrayList<String> getParams() {

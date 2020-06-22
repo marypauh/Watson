@@ -58,11 +58,12 @@ private String tipoFinal;
 		MessageResponse assistantResponse = getAssistant(service,conversationMsg,context);
 		context.put("saludo", ServiciosChat.determinarHora());
 		
-		String tipoAccion = (String) context.get("accion");	
-		System.out.println("ACCION: " +tipoAccion);
+		//String tipoAccion = (String) context.get("accion");	
+		//System.out.println("ACCION: " +tipoAccion);
 		
 		CifradorFactory factory = new CifradorFactory();
 		Cifrador cifrador;
+		String respuestaParam;
 		
 			
 		try {
@@ -70,9 +71,19 @@ private String tipoFinal;
 			ServiciosChat.setContext(contexto);
 			ServiciosChat.imprimirContexto();
 			
+			String tipoAccion = (String) ServiciosChat.cont.get("accion");
+			ServiciosChat.accion = tipoAccion;
+			
 			String tipoB = (String) ServiciosChat.cont.get("tipoCifrador");
 			System.out.println("VALOR: " +tipoB);
 			ServiciosChat.valorTipo = tipoB;
+			
+			respuestaParam = (String) ServiciosChat.cont.get("parametro");
+			ServiciosChat.parametro = respuestaParam;
+			
+			String respuestaTexto = (String) ServiciosChat.cont.get("respuestaTexto");
+			ServiciosChat.textoRespuesta = respuestaTexto;
+			
 			
 		} catch (Exception e) {
 			
@@ -80,14 +91,25 @@ private String tipoFinal;
 		
 		if(ServiciosChat.valorTipo != null) {
 			try {
-				System.out.println(ServiciosChat.valorTipo);
 				cifrador = factory.crearCifrador(ServiciosChat.valorTipo);
 				String texto = ServiciosChat.pedirParams(cifrador);
 				System.out.println(texto);
 				context.put("pedirParametros", texto);
 				System.out.println("hola");
-				ServiciosChat.agregarParametro(texto);
 				
+				if(ServiciosChat.parametro != null) {
+					System.out.println(ServiciosChat.parametro);
+					ServiciosChat.agregarParam(cifrador,ServiciosChat.parametro);
+				
+				
+					if (ServiciosChat.textoRespuesta != null) {
+						System.out.println("TEXTO: " + ServiciosChat.textoRespuesta + "Cifrador: " + cifrador);
+						ServiciosChat.textoLISTO = ServiciosChat.realizarAccion(cifrador);
+						System.out.println(ServiciosChat.textoLISTO);
+						context.put("textoFinal", ServiciosChat.textoLISTO);
+						ServiciosChat.parametros.clear();
+						}
+				}
 			} catch (InstantiationException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
