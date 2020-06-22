@@ -5,6 +5,7 @@ import factory.CifradorFactory;
 import modelo.Cifrador;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -30,7 +31,7 @@ import com.ibm.watson.developer_cloud.service.security.IamOptions;
 @Path("/chatservice")
 public class ChatService {
 
-	private String tipoFinal;
+private String tipoFinal;
 	
 	private String urlDB;
 	private String userDB;
@@ -50,71 +51,92 @@ public class ChatService {
 	@GET
 	@Produces("application/json")
 	public Response getResponse(@QueryParam("conversationMsg") String conversationMsg, @QueryParam("conversationCtx") String conversationCtx) {
-		
-		IamOptions iAmOptions = new IamOptions.Builder()
-			.apiKey(apiKey)
-		    .build();
-
-		Assistant service = new Assistant("2018-09-20", iAmOptions);
-		service.setEndPoint(assistantURL);
-		
-		// Initialize with empty value to start the conversation.
-		JSONObject ctxJsonObj = new JSONObject(conversationCtx);
-		Context context = new Context();
-		context.putAll(ctxJsonObj.toMap());		
-		
+		Assistant service = serviceBuild();
+		Context context = setContext(conversationCtx);	
 		InputData input = new InputData.Builder(conversationMsg).build();
 		MessageOptions options = new MessageOptions.Builder(workspaceId).input(input).context(context).build();
-		
-		MessageResponse assistantResponse = service.message(options).execute();
-		System.out.println(assistantResponse);
-		 
-		
-		//DespuEs del assistant Response manipulamos el contexto
-
+		MessageResponse assistantResponse = getAssistant(service,conversationMsg,context);
 		context.put("saludo", ServiciosChat.determinarHora());
 		
+		String tipoAccion = (String) context.get("accion");	
+		System.out.println("ACCION: " +tipoAccion);
 		
 		CifradorFactory factory = new CifradorFactory();
 		Cifrador cifrador;
-		System.out.println("aqui");
-	
-		//if (tipoF != null) {
+		
+			
 		try {
-			String tipoF = (String) context.get("tipoCifrador");
-			System.out.println("tipoCifrador: "+ tipoF);
-				cifrador = factory.crearCifrador(tipoF);
+			Context contexto = assistantResponse.getContext();
+			ServiciosChat.setContext(contexto);
+			ServiciosChat.imprimirContexto();
+			
+			String tipoB = (String) ServiciosChat.cont.get("tipoCifrador");
+			System.out.println("VALOR: " +tipoB);
+			ServiciosChat.valorTipo = tipoB;
+			
+		} catch (Exception e) {
+			
+		}
+		
+		if(ServiciosChat.valorTipo != null) {
+			try {
+				System.out.println(ServiciosChat.valorTipo);
+				cifrador = factory.crearCifrador(ServiciosChat.valorTipo);
 				String texto = ServiciosChat.pedirParams(cifrador);
-				context.put("pedirParametro", texto);
+				System.out.println(texto);
+				context.put("pedirParametros", texto);
 				System.out.println("hola");
-				String respuesta = (String) context.get("respuestaTexto");
-				System.out.println("El usuario puso: " +respuesta);
-				ServiciosChat.agregarParam(cifrador,respuesta);
+				ServiciosChat.agregarParametro(texto);
+				
 			} catch (InstantiationException e) {
 				// TODO Auto-generated catch block
-					System.out.println("1. " +e);
+				e.printStackTrace();
 			} catch (IllegalAccessException e) {
 				// TODO Auto-generated catch block
-				System.out.println("2. " +e);
+				e.printStackTrace();
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
-				System.out.println("3. " +e);
+				e.printStackTrace();
 			}
-		//}
 			
-			String tipoAccion = (String) context.get("accion");
-			System.out.println(tipoAccion);
-				
-			
-			//RepeticiOn innecesaria (mete nuevo contexto a la conversaciOn)
-			input = new InputData.Builder(conversationMsg).build();
-	        options = new MessageOptions.Builder(workspaceId).input(input).context(context).build();
-	        
-	        assistantResponse = service.message(options).execute();    
-			
-
+			}
 		
-	     // Print the output from dialog, if any.
+		//RepeticiOn innecesaria (mete nuevo contexto a la conversaciOn)
+		
+		input = new InputData.Builder(conversationMsg).build();
+		options = new MessageOptions.Builder(workspaceId).input(input).context(context).build();
+		assistantResponse = service.message(options).execute();
+		JSONObject object = Output(assistantResponse);
+		return Response.status(Status.OK).entity(object.toString()).build();
+			}	
+	
+	
+	//Metodos de conexion
+	private Assistant serviceBuild() {
+		IamOptions iAmOptions = new IamOptions.Builder()
+			.apiKey(apiKey)
+		    .build();
+		Assistant service = new Assistant("2018-09-20", iAmOptions);
+		service.setEndPoint(assistantURL);
+	return service;
+	}
+	
+	private Context setContext(String conversationCtx) {
+		JSONObject ctxJsonObj = new JSONObject(conversationCtx);
+		Context context = new Context();
+		context.putAll(ctxJsonObj.toMap());	
+		return context;
+	}
+	
+	private MessageResponse getAssistant(Assistant service, String conversationMsg, Context context) {
+		InputData input = new InputData.Builder(conversationMsg).build();
+		MessageOptions options = new MessageOptions.Builder(workspaceId).input(input).context(context).build();
+		MessageResponse assistantResponse = service.message(options).execute();
+	return assistantResponse;
+	}
+	
+	
+    private JSONObject Output(MessageResponse assistantResponse) {
 			List<String> assistantResponseList = assistantResponse.getOutput().getText();
 			JSONObject object = new JSONObject();
 			
@@ -124,7 +146,7 @@ public class ChatService {
 				
 			object.put("response", assistantResponseText);
 			object.put("context", assistantResponse.getContext());
-			return Response.status(Status.OK).entity(object.toString()).build();
-			}	
+			return object;
+	     }
 	
 }

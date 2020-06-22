@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+import com.ibm.watson.developer_cloud.assistant.v1.model.Context;
+
 import factory.CifradorFactory;
 import modelo.Cifrador;
 
 public class ServiciosChat {
 	
+	static Context cont;
 	static ArrayList<String> parametros = new ArrayList<String>();
+	static String valorTipo;
 	
 	public static String determinarHora() {
 		int hora = obtenerHora();
@@ -50,7 +54,19 @@ public class ServiciosChat {
 			parametros.add(respuesta);
 			cifrador.setListParams(parametros); 
 		}
-		 
+		
+		
+		public static void setContext(Context contexto) {
+			cont = contexto;	
+		}
+		
+		public static void imprimirContexto() {
+			System.out.println("Contexto: " +cont);
+		}
+		
+		public static void agregarParametro(String pTexto) {
+			valorTipo = pTexto;
+		}
 }
 
 
