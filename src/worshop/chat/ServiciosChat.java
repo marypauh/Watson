@@ -3,6 +3,8 @@ package worshop.chat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.ibm.watson.developer_cloud.assistant.v1.model.Context;
 
@@ -90,21 +92,48 @@ public class ServiciosChat {
 			 String respuesta;
 			 String traduccion;
 		    if(accion.equals("codificar")) {
-		    	traduccion = traduccirTexto(ServiciosChat.textoRespuesta);
+		    	traduccion = traducirTexto(ServiciosChat.textoRespuesta);
 		    	respuesta = pCifrador.codificar(ServiciosChat.textoRespuesta) +
 		    			"Texto Traducido al inglés: " + traduccion
 		    			+ "Texto traducido cifrado :" + pCifrador.codificar(traduccion) ;
 		    } else {
 		    	String decodificacion = pCifrador.decodificar(ServiciosChat.textoRespuesta);
 		    	respuesta = decodificacion + "Texto decodificado traducido al inglés: " +
-		    			traduccirTexto(decodificacion);
+		    			traducirTexto(decodificacion);
 		    }
 		    return respuesta;
 		    	
 		  }
 		 
-		 public static String traduccirTexto(String pTexto) throws Exception {
+		 public static String traducirTexto(String pTexto) throws Exception {
 			 return Traductor.translate("es", "eng", pTexto);
+		 }
+		 
+		 public static String obtenerTexto(String pTexto) {
+		    	if (ServiciosChat.valorTipo.equals("Binario") || ServiciosChat.valorTipo.equals("Telefonico") || ServiciosChat.valorTipo.equals("TransMensaje") || ServiciosChat.valorTipo.equals("TransPalabra")) {
+		    		return MatcherSimple(pTexto);
+		    		}  else if(ServiciosChat.valorTipo.equals("Cesar")){
+		    		String casi = pTexto.substring(pTexto.indexOf("desplazamiento: ") + 1 , pTexto.length());
+		    		return MatcherSimple(casi);
+		    		
+		    	} else if (ServiciosChat.valorTipo.equals("Llave")) {
+		    		System.out.println("esta aqui");
+		    		String casi = pTexto.substring(pTexto.indexOf("llave: ") + 7 , pTexto.length());
+		    		System.out.println(casi);
+		    		return MatcherSimple(casi);
+		    	} else {
+		    		String casi = pTexto.substring(pTexto.indexOf("cifra: ") + 1 , pTexto.length());
+		    		return MatcherSimple(casi);
+		    	}
+		    }
+
+		 
+	public static String MatcherSimple(String pTexto) {
+			 Matcher matcher = Pattern.compile("\"(.*?)\"").matcher(pTexto);
+	    	if (matcher.find()){
+	    		return matcher.group(1); 
+		 }
+	    	return "fail";
 		 }
 }
 

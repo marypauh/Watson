@@ -7,6 +7,9 @@ import modelo.Cifrador;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -50,7 +53,7 @@ private String tipoFinal;
 
 	@GET
 	@Produces("application/json")
-	public Response getResponse(@QueryParam("conversationMsg") String conversationMsg, @QueryParam("conversationCtx") String conversationCtx) {
+	public Response getResponse(@QueryParam("conversationMsg") String conversationMsg, @QueryParam("conversationCtx") String conversationCtx) throws Exception {
 		Assistant service = serviceBuild();
 		Context context = setContext(conversationCtx);	
 		InputData input = new InputData.Builder(conversationMsg).build();
@@ -111,12 +114,28 @@ private String tipoFinal;
 						context.put("textoFinal", ServiciosChat.textoLISTO);
 						ServiciosChat.parametros.clear();
 					} 
+				}
 					else if (ServiciosChat.completo != null) {
 						System.out.println("Todo el texto: " + ServiciosChat.completo);
-					//llamar matcher y realizar accion		
+						
+						if (ServiciosChat.valorTipo.equals("Cesar") || ServiciosChat.valorTipo.equals("Llave") || ServiciosChat.valorTipo.equals("Vigenere")) {
+							ServiciosChat.parametro = ServiciosChat.obtenerTexto(ServiciosChat.completo);
 							
+							System.out.println("Param: " +ServiciosChat.parametro);
+							ServiciosChat.agregarParam(cifrador,ServiciosChat.parametro);
+							
+							ServiciosChat.textoRespuesta = ServiciosChat.MatcherSimple(ServiciosChat.completo);
+							System.out.println("TEXTO LISTO: " +ServiciosChat.textoRespuesta);
+							
+						} else {
+						ServiciosChat.textoRespuesta = ServiciosChat.obtenerTexto(ServiciosChat.completo);
+						System.out.println("TEXTO CORTADO: " +ServiciosChat.parametro);
 						}
-				}
+						ServiciosChat.textoLISTO = ServiciosChat.realizarAccion(cifrador);
+						context.put("textoCompleto", ServiciosChat.textoLISTO);
+						ServiciosChat.parametros.clear();				
+				
+					}
 			} catch (InstantiationException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -177,10 +196,6 @@ private String tipoFinal;
 			object.put("context", assistantResponse.getContext());
 			return object;
 	     }
-    
-    private void obtenerTexto(String pTexto) {
- 
-    	
-    }
+   
 	
 }
