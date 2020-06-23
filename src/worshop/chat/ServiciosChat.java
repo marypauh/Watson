@@ -8,6 +8,7 @@ import com.ibm.watson.developer_cloud.assistant.v1.model.Context;
 
 import factory.CifradorFactory;
 import modelo.Cifrador;
+import util.Traductor;
 
 public class ServiciosChat {
 	
@@ -93,6 +94,11 @@ public class ServiciosChat {
 		    }
 		    	
 		  }
+		 
+		 public static String traduccirTexto(String pTexto) throws Exception {
+			 return Traductor.translate("es", "eng", pTexto);
+			 
+		 }
 }
 
 
