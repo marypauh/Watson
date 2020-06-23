@@ -18,6 +18,7 @@ public class ServiciosChat {
 	static String accion;
 	static String textoRespuesta;
 	static String textoLISTO;
+	static String completo;
 	
 	public static String determinarHora() {
 		int hora = obtenerHora();

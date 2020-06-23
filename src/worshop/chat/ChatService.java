@@ -84,6 +84,8 @@ private String tipoFinal;
 			String respuestaTexto = (String) ServiciosChat.cont.get("respuestaTexto");
 			ServiciosChat.textoRespuesta = respuestaTexto;
 			
+			String textoCompleto = (String) ServiciosChat.cont.get("completo");
+			ServiciosChat.completo = textoCompleto;
 			
 		} catch (Exception e) {
 			
@@ -108,6 +110,11 @@ private String tipoFinal;
 						System.out.println(ServiciosChat.textoLISTO);
 						context.put("textoFinal", ServiciosChat.textoLISTO);
 						ServiciosChat.parametros.clear();
+					} 
+					else if (ServiciosChat.completo != null) {
+						System.out.println("Todo el texto: " + ServiciosChat.completo);
+					//llamar matcher y realizar accion		
+							
 						}
 				}
 			} catch (InstantiationException e) {
@@ -170,5 +177,10 @@ private String tipoFinal;
 			object.put("context", assistantResponse.getContext());
 			return object;
 	     }
+    
+    private void obtenerTexto(String pTexto) {
+ 
+    	
+    }
 	
 }
