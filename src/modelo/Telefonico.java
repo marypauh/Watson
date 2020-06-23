@@ -26,20 +26,23 @@ public class Telefonico extends Cifrador {
 
 	  @Override
 	  public String decodificar(String ptexto) {
-        String fraseCifrada = "";
-       int indice = 0;
-       while(indice<ptexto.length()){
-		 if(ptexto.charAt(indice) == '*'){
-		   fraseCifrada += " ";
-		   indice++;
-		 } else {
-			fraseCifrada += numeroALetra(ptexto.charAt(indice),ptexto.charAt(indice+1));
-			indice+=2;
-		  }
-		}
-		 return fraseCifrada;	  
-	   }
-	  
+	        String fraseCifrada = "";
+	       int indice = 0;
+	       while(indice<ptexto.length()){
+			 if(ptexto.charAt(indice) == '*'){
+			   fraseCifrada += " ";
+			   indice++;
+			 } else {
+				if (ptexto.charAt(indice) != ' ') {
+				fraseCifrada += numeroALetra(ptexto.charAt(indice),ptexto.charAt(indice+1));
+				indice +=2;
+				}else {
+				indice+=1;
+				}
+			  }
+			}
+			 return fraseCifrada;	  
+		   }
 	  
 	  private String verificarLetra(char pLetra){
 	    if(pLetra == ' '){
