@@ -85,19 +85,26 @@ public class ServiciosChat {
 			
 		}
 		
-		 public static String realizarAccion(Cifrador pCifrador) {
+		 public static String realizarAccion(Cifrador pCifrador) throws Exception {
 			 System.out.println(accion);
+			 String respuesta;
+			 String traduccion;
 		    if(accion.equals("codificar")) {
-		    	return pCifrador.codificar(ServiciosChat.textoRespuesta);
+		    	traduccion = traduccirTexto(ServiciosChat.textoRespuesta);
+		    	respuesta = pCifrador.codificar(ServiciosChat.textoRespuesta) +
+		    			"Texto Traducido al inglés: " + traduccion
+		    			+ "Texto traducido cifrado :" + pCifrador.codificar(traduccion) ;
 		    } else {
-		    	return pCifrador.decodificar(ServiciosChat.textoRespuesta);
+		    	String decodificacion = pCifrador.decodificar(ServiciosChat.textoRespuesta);
+		    	respuesta = decodificacion + "Texto decodificado traducido al inglés: " +
+		    			traduccirTexto(decodificacion);
 		    }
+		    return respuesta;
 		    	
 		  }
 		 
 		 public static String traduccirTexto(String pTexto) throws Exception {
 			 return Traductor.translate("es", "eng", pTexto);
-			 
 		 }
 }
 
