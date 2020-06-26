@@ -10,7 +10,6 @@ import com.ibm.watson.developer_cloud.assistant.v1.model.Context;
 
 import factory.CifradorFactory;
 import modelo.Cifrador;
-import util.Traductor;
 
 public class ServiciosChat {
 	
@@ -90,24 +89,15 @@ public class ServiciosChat {
 		 public static String realizarAccion(Cifrador pCifrador) throws Exception {
 			 System.out.println(accion);
 			 String respuesta;
-			 String traduccion;
 		    if(accion.equals("codificar")) {
-		    	traduccion = traducirTexto(ServiciosChat.textoRespuesta);
-		    	respuesta = pCifrador.codificar(ServiciosChat.textoRespuesta) +
-		    			"Texto Traducido al inglés: " + traduccion
-		    			+ "Texto traducido cifrado :" + pCifrador.codificar(traduccion) ;
+		    	respuesta = pCifrador.codificar(ServiciosChat.textoRespuesta);
 		    } else {
-		    	String decodificacion = pCifrador.decodificar(ServiciosChat.textoRespuesta);
-		    	respuesta = decodificacion + "Texto decodificado traducido al inglés: " +
-		    			traducirTexto(decodificacion);
+		    	respuesta  = pCifrador.decodificar(ServiciosChat.textoRespuesta);
 		    }
 		    return respuesta;
 		    	
 		  }
 		 
-		 public static String traducirTexto(String pTexto) throws Exception {
-			 return Traductor.translate("es", "eng", pTexto);
-		 }
 		 
 		 public static String obtenerTexto(String pTexto) {
 		    	if (ServiciosChat.valorTipo.equals("Binario") || ServiciosChat.valorTipo.equals("Telefonico") || ServiciosChat.valorTipo.equals("TransMensaje") || ServiciosChat.valorTipo.equals("TransPalabra")) {

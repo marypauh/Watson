@@ -58,6 +58,7 @@ public class Telefonico extends Cifrador {
 	      for (int columna = 0; columna < teclado[fila].length; columna++){
 		if(pLetra == teclado[fila][columna]) {
 		  sustiticion = String.valueOf((((fila+2)*10)+(columna+1)));
+		  sustiticion += " ";
 	          break;
 		}
 	      }
