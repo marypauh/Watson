@@ -2,9 +2,9 @@
 applications:
 - instances: 1
   timeout: 180
-  name: raquelymariapaulapp1
+  name: pp1raquelymariapaula
   buildpack: liberty-for-java
   path: ./target/WatsonAssistantChat-0.0.1.war
   memory: 256M
   domain: mybluemix.net
-  host: raquelymariapaulapp1
+  host: pp1raquelymariapaula
