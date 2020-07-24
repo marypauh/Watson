@@ -10,6 +10,7 @@ import com.ibm.watson.developer_cloud.assistant.v1.model.Context;
 
 import factory.CifradorFactory;
 import modelo.Cifrador;
+import util.AnalizadorTono;
 
 public class ServiciosChat {
 	
@@ -89,15 +90,20 @@ public class ServiciosChat {
 		 public static String realizarAccion(Cifrador pCifrador) throws Exception {
 			 System.out.println(accion);
 			 String respuesta;
+			 String texto = ServiciosChat.textoRespuesta;
 		    if(accion.equals("codificar")) {
-		    	respuesta = pCifrador.codificar(ServiciosChat.textoRespuesta);
+		    	if (AnalizadorTono.existeEnojo(texto) == 1) {
+		    		respuesta = "Se ha encontrado sentimientos de Enojo en el texto, como no se apega a "
+		    				+ "las reglas de Netiquette no es posible realizar la codificacion";
+		    	}else {
+		    		respuesta = "El texto codificado es: " + pCifrador.codificar(texto);
+		    	}
 		    } else {
-		    	respuesta  = pCifrador.decodificar(ServiciosChat.textoRespuesta);
+		    	respuesta  = "El texto decodificado es: " + pCifrador.decodificar(texto);
 		    }
 		    return respuesta;
 		    	
 		  }
-		 
 		 
 		 public static String obtenerTexto(String pTexto) {
 		    	if (ServiciosChat.valorTipo.equals("Binario") || ServiciosChat.valorTipo.equals("Telefonico") || ServiciosChat.valorTipo.equals("TransMensaje") || ServiciosChat.valorTipo.equals("TransPalabra")) {
