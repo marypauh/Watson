@@ -1,7 +1,10 @@
 package worshop.chat;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,17 +25,20 @@ public class ServiciosChat {
 	static String textoRespuesta;
 	static String textoLISTO;
 	static String completo;
+	static String tipoBitacora;
+	static String opcionBitacora;
+	static String textoBitacora;
 	
 	public static String determinarHora() {
 		int hora = obtenerHora();
 			    
-		if(hora <= 12) {
+		if(hora < 12) {
 		  return "Buenos días";
 		}    
-		if(hora < 17 && hora > 12) {
+		if(hora < 18 && hora >= 12) {
 		  return "Buenas tardes";
 		}    
-		if (hora <=24 && hora >= 17) {
+		if (hora <=24 && hora >= 18) {
 		  return "Buenas noches";
 		}	    
 		return "Buenas";
@@ -131,6 +137,22 @@ public class ServiciosChat {
 		 }
 	    	return "fail";
 		 }
+	
+	public static String fijarFecha() {
+		Date date = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		String fecha = dateFormat.format(date);
+		return fecha;
+	}
+	
+	public static String fijarHora() {
+		Date date = new Date();
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+		String hora = dateFormat.format(date);
+		return hora;
+	  }
+	
+	
 }
 
 
