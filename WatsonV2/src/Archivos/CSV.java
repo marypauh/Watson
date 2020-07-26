@@ -30,12 +30,12 @@ public class CSV {
 		if (contador == 0) {
 			Bitacora bit = new Bitacora(pFecha,pHora,pAccion,pTexto); 
 			bitacoras.add(bit);
-			writeCsv(bitacoras);
+			crearCsv(bitacoras);
 			contador +=1;
 		}
 	}
 	
-	private static void writeCsv(ArrayList<Bitacora> bitacoras) { 
+	private static void crearCsv(ArrayList<Bitacora> bitacoras) { 
 			FileWriter fileWriter = null; 
 			
 		try {
