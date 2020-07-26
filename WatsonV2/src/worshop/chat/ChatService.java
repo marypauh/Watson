@@ -110,6 +110,9 @@ private String tipoFinal;
 			
 			String textoBitacora = (String) ServiciosChat.cont.get("textoBitacora");
 			ServiciosChat.textoBitacora = textoBitacora;
+			
+			String realizaAccion = (String) ServiciosChat.cont.get("cifrar");
+			ServiciosChat.realizoAccion = realizaAccion;
 	
 		} catch (Exception e) {
 			
@@ -186,9 +189,11 @@ private String tipoFinal;
 						System.out.println(ServiciosChat.textoLISTO);
 						context.put("textoFinal", ServiciosChat.textoLISTO);
 						ServiciosChat.parametros.clear();
-						CSV.agregarBitacora(CSV.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
-						TXT.agregarBitacora(TXT.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
+							CSV.agregarBitacora(CSV.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
+							TXT.agregarBitacora(TXT.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
+						
 					} 
+						
 				}
 					else if (ServiciosChat.completo != null) {
 						System.out.println("Todo el texto: " + ServiciosChat.completo);

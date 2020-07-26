@@ -27,12 +27,10 @@ public class TXT {
 	public static ArrayList<Bitacora> bitacoras = new ArrayList<Bitacora>();
 	
 	public static void agregarBitacora(ArrayList<Bitacora> bitacoras, String pFecha, String pHora, String pAccion, String pTexto) {
-		if (contador == 0) {
 			Bitacora bit = new Bitacora(pFecha,pHora,pAccion,pTexto); 
 			bitacoras.add(bit);
 			crearTxt(bitacoras);
-			contador +=1;
-		}
+			bitacoras.clear();
 	}
 	
 	private static void crearTxt(ArrayList<Bitacora> bitacoras) { 

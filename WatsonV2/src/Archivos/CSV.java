@@ -22,17 +22,14 @@ import worshop.chat.ServiciosChat;
 
 public class CSV {
 	
-	private static int contador =0;
 	private static File archivo = new File("C:\\Users\\personal\\Documents\\GitHub\\Watson\\WatsonV2\\src\\Bitacora.csv");
 	public static ArrayList<Bitacora> bitacoras = new ArrayList<Bitacora>();
 	
 	public static void agregarBitacora(ArrayList<Bitacora> bitacoras, String pFecha, String pHora, String pAccion, String pTexto) {
-		if (contador == 0) {
 			Bitacora bit = new Bitacora(pFecha,pHora,pAccion,pTexto); 
 			bitacoras.add(bit);
 			crearCsv(bitacoras);
-			contador +=1;
-		}
+			bitacoras.clear();
 	}
 	
 	private static void crearCsv(ArrayList<Bitacora> bitacoras) { 

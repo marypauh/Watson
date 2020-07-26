@@ -28,6 +28,7 @@ public class ServiciosChat {
 	static String tipoBitacora;
 	static String opcionBitacora;
 	static String textoBitacora;
+	static String realizoAccion;
 	
 	public static String determinarHora() {
 		int hora = obtenerHora();
