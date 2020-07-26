@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class TransMensaje extends Transposicion{
 
 	@Override
-	public String invertir(String pTexto) {
+	protected String invertir(String pTexto) {
 		String frasesInvertida = "";
 	    String[] palabras = pTexto.split("\\s+");
 	      
