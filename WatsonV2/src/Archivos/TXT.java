@@ -25,14 +25,14 @@ import worshop.chat.ServiciosChat;
 public class TXT {
 	
 	private static int contador =0;
-	private static File archivo = new File("C:\\Users\\raque\\OneDrive\\\\Desktop\\bitacora.txt");
+	private static File archivo = new File("C:\\Users\\personal\\Documents\\GitHub\\Watson\\WatsonV2\\src\\Bitacora.csv");
 	public static ArrayList<Bitacora> bitacoras = new ArrayList<Bitacora>();
 	
 	public static void agregarBitacora(ArrayList<Bitacora> bitacoras, String pFecha, String pHora, String pAccion, String pTexto) {
 			Bitacora bit = new Bitacora(pFecha,pHora,pAccion,pTexto); 
 			bitacoras.add(bit);
 			crearTxt(bitacoras);
-			bitacoras.clear();
+			bitacoras.clear(); 
 	}
 	
 	private static void crearTxt(ArrayList<Bitacora> bitacoras) { 

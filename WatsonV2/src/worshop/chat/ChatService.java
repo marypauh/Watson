@@ -36,6 +36,7 @@ import modelo.BitacoraXML;
 import Archivos.CSV;
 import Archivos.TXT;
 import Archivos.XML;
+import decorador.DecoradorArchivos;
 
 
 @Path("/chatservice")
@@ -186,16 +187,12 @@ private String tipoFinal;
 				
 					if (ServiciosChat.textoRespuesta != null) {
 						System.out.println("TEXTO: " + ServiciosChat.textoRespuesta + "Cifrador: " + cifrador);
-						ServiciosChat.textoLISTO = ServiciosChat.realizarAccion(cifrador);
+						ServiciosChat.textoLISTO = DecoradorArchivos.agregar(ServiciosChat.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO, cifrador);
 						System.out.println(ServiciosChat.textoLISTO);
 						context.put("textoFinal", ServiciosChat.textoLISTO);
 						ServiciosChat.parametros.clear();
 						
-						if (ServiciosChat.textoLISTO != null) {
-							CSV.agregarBitacora(CSV.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
-						    TXT.agregarBitacora(TXT.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
-							XML.agregarBitacoras(ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
-						}
+						
 					} 
 						
 				}

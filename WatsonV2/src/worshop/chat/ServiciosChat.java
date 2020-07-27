@@ -15,6 +15,7 @@ import Archivos.CSV;
 import Archivos.TXT;
 import Archivos.XML;
 import factory.CifradorFactory;
+import modelo.Bitacora;
 import modelo.Cifrador;
 import util.AnalizadorTono;
 
@@ -32,6 +33,7 @@ public class ServiciosChat {
 	static String opcionBitacora;
 	static String textoBitacora;
 	static String realizoAccion;
+	public static ArrayList<Bitacora> bitacoras = new ArrayList<Bitacora>();
 	
 	public static String determinarHora() {
 		int hora = obtenerHora();

@@ -19,7 +19,7 @@ import util.utilBitacora;
 import worshop.chat.ServiciosChat;
 
 public class XML {
-		public static String filepath = "C:\\Users\\raque\\OneDrive\\Desktop\\bitacora";
+		public static String filepath = "C:\\Users\\personal\\Documents\\GitHub\\Watson\\WatsonV2\\src\\Bitacora.xml";
 
 		public static void crearBitacoraXML(BitacoraXML pBitacora) throws JAXBException {
 			File file = new File(filepath + ".xml");

@@ -1,25 +1,2 @@
-26/07/2020,16:53:48,codificar,El texto codificado es: 71 82 53 53 *82 71 
-26/07/2020,16:54:55,codificar,El texto codificado es: 00000 01111 00000 10001 00100 01101 10011 00100 01100 00100 01101 10011 00100 
-26/07/2020,16:57:33,codificar,El texto codificado es: 71 63 73 *33 21 83 63 73 *93 43 74 82 74 
-26/07/2020,17:00:53,codificar,El texto codificado es: 71 53 32 21 74 32 
-26/07/2020,16:53:48,codificar,El texto codificado es: 71 82 53 53 *82 71 
-26/07/2020,16:54:55,codificar,El texto codificado es: 00000 01111 00000 10001 00100 01101 10011 00100 01100 00100 01101 10011 00100 
-26/07/2020,16:57:33,codificar,El texto codificado es: 71 63 73 *33 21 83 63 73 *93 43 74 82 74 
-26/07/2020,17:00:53,codificar,El texto codificado es: 71 53 32 21 74 32 
-26/07/2020,17:01:25,codificar,El texto codificado es: 01111 01011 01000 10010 
-26/07/2020,17:07:59,codificar,El texto codificado es: 00100 10010 10011 01110 11000 * 00111 00000 10001 10011 00000 
-26/07/2020,17:07:59,codificar,El texto codificado es: 00100 10010 10011 01110 11000 * 00111 00000 10001 10011 00000 
-26/07/2020,17:09:14,codificar,Se ha encontrado sentimientos de Enojo en el texto, como no se apega a las reglas de Netiquette no es posible realizar la codificacion
-26/07/2020,17:07:59,codificar,El texto codificado es: 00100 10010 10011 01110 11000 * 00111 00000 10001 10011 00000 
-26/07/2020,17:09:14,codificar,Se ha encontrado sentimientos de Enojo en el texto, como no se apega a las reglas de Netiquette no es posible realizar la codificacion
-26/07/2020,17:10:00,codificar,El texto codificado es: 21 61 63 *71 73 63 41 73 21 61 21 73 
-26/07/2020,17:07:59,codificar,El texto codificado es: 00100 10010 10011 01110 11000 * 00111 00000 10001 10011 00000 
-26/07/2020,17:09:14,codificar,Se ha encontrado sentimientos de Enojo en el texto, como no se apega a las reglas de Netiquette no es posible realizar la codificacion
-26/07/2020,17:10:00,codificar,El texto codificado es: 21 61 63 *71 73 63 41 73 21 61 21 73 
-26/07/2020,17:10:25,decodificar,El texto decodificado es: amo programar
-26/07/2020,17:19:34,codificar,El texto codificado es: 00010 10001 00100 00100 01100 00100 
-26/07/2020,17:19:34,codificar,El texto codificado es: 00010 10001 00100 00100 01100 00100 
-26/07/2020,17:20:11,codificar,El texto codificado es: ocilpus ol et 
-26/07/2020,17:19:34,codificar,El texto codificado es: 00010 10001 00100 00100 01100 00100 
-26/07/2020,17:20:11,codificar,El texto codificado es: ocilpus ol et 
-26/07/2020,17:21:05,decodificar,El texto decodificado es: te lo suplico 
+26/07/2020,18:29:09,codificar,El texto codificado es: 00010 01110 01011 01110 10001 00100 10010 
+26/07/2020,18:29:51,decodificar,El texto codificado es: 43 62 23 63 61 71 21 73 21 22 53 32 
