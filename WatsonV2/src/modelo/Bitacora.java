@@ -1,7 +1,6 @@
 package modelo;
 
 public class Bitacora {
-
 	private String fecha;
 	private String accion;
 	private String texto;
@@ -44,12 +43,5 @@ public class Bitacora {
 		
 	return msg;
 	}
-	
-	
-	
-	
-	
+
 }
-
-	
-

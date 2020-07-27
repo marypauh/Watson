@@ -11,6 +11,9 @@ import java.util.regex.Pattern;
 
 import com.ibm.watson.developer_cloud.assistant.v1.model.Context;
 
+import Archivos.CSV;
+import Archivos.TXT;
+import Archivos.XML;
 import factory.CifradorFactory;
 import modelo.Cifrador;
 import util.AnalizadorTono;
@@ -108,8 +111,7 @@ public class ServiciosChat {
 		    } else {
 		    	respuesta  = "El texto decodificado es: " + pCifrador.decodificar(texto);
 		    }
-		    return respuesta;
-		    	
+		    return respuesta;	
 		  }
 		 
 		 public static String obtenerTexto(String pTexto) {

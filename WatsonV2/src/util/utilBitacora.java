@@ -17,26 +17,26 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import modelo.Registro;
-import modelo.Bitacora;
+import modelo.BitacoraXML;
 
 
 public class utilBitacora {
 	public static String filepath = "C:\\Users\\raque\\OneDrive\\Desktop\\bitacora";
 	private int contador = 0;
 	
-	public static void crearBitacoraXML(Bitacora pBitacora) throws JAXBException {
+	public static void crearBitacoraXML(BitacoraXML pBitacora) throws JAXBException {
 		File file = new File(filepath + ".xml");
-		JAXBContext jaxbContext = JAXBContext.newInstance(Bitacora.class);
+		JAXBContext jaxbContext = JAXBContext.newInstance(BitacoraXML.class);
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 		jaxbMarshaller.marshal(pBitacora, file);
 	}
 
-	  public static Bitacora leerXML() throws ParserConfigurationException, SAXException, IOException, JAXBException{
+	  public static BitacoraXML leerXML() throws ParserConfigurationException, SAXException, IOException, JAXBException{
 		    File file = new File(filepath+".xml");
-		    JAXBContext jaxbContext = JAXBContext.newInstance(Bitacora.class);
+		    JAXBContext jaxbContext = JAXBContext.newInstance(BitacoraXML.class);
 		    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-		    Bitacora bitacora = (Bitacora) jaxbUnmarshaller.unmarshal(file);
+		    BitacoraXML bitacora = (BitacoraXML) jaxbUnmarshaller.unmarshal(file);
 		    return bitacora;
 		  }
 	  /**
@@ -49,7 +49,7 @@ public class utilBitacora {
 	    File xml = new File(filepath+".xml");
 	    File csv = new File(filepath+".csv");
 	    File txt = new File(filepath+".txt");
-	    Bitacora bitacora = new Bitacora();
+	    BitacoraXML bitacora = new BitacoraXML();
 	    if(!xml.exists()) {
 	      crearBitacoraXML(bitacora);
 	    }
@@ -64,7 +64,7 @@ public class utilBitacora {
 	  }
 	  
 	  
-	  private static void crearBitacora(Bitacora pBitacora,String pTipoSeparador, String pTipoArchivo) throws IOException {
+	  private static void crearBitacora(BitacoraXML pBitacora,String pTipoSeparador, String pTipoArchivo) throws IOException {
 		FileWriter file= new FileWriter(filepath+"."+pTipoArchivo,true);  
 		for(Registro registro: pBitacora.registros ) {
 		  file.append(registro.getFecha());
@@ -88,7 +88,7 @@ public class utilBitacora {
 	   * @param pTipoArchivo
 	   * @throws IOException
 	   */
-	  public static void crearBitacora(Bitacora pBitacora, String pTipoArchivo) throws IOException {
+	  public static void crearBitacora(BitacoraXML pBitacora, String pTipoArchivo) throws IOException {
 		if(pTipoArchivo.equals("txt")) {
 	  	crearBitacora(pBitacora, "\t", pTipoArchivo);
 	  	return;
@@ -103,8 +103,8 @@ public class utilBitacora {
 	   * @return
 	   * @throws JAXBException
 	   */
-	  public static String bitacoraToStringXML(Bitacora pBitacoraXML) throws JAXBException {
-	    JAXBContext jaxbContext = JAXBContext.newInstance(Bitacora.class);
+	  public static String bitacoraToStringXML(BitacoraXML pBitacoraXML) throws JAXBException {
+	    JAXBContext jaxbContext = JAXBContext.newInstance(BitacoraXML.class);
 	    Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 	    jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 	    StringWriter writer = new StringWriter();
@@ -117,7 +117,7 @@ public class utilBitacora {
 	   * Lee la bitácora dependiendo del tipo
 	   * que sea, csv o txt.
 	   */
-	  public static String leerBitacora(Bitacora pBitacora,String pTipoArchivo) {
+	  public static String leerBitacora(BitacoraXML pBitacora,String pTipoArchivo) {
 		if(pTipoArchivo.equals("txt")) {
 	      return bitacoraToString(pBitacora,"\t");
 	    }
@@ -131,7 +131,7 @@ public class utilBitacora {
 	   * @param pTipoSeparador
 	   * @return
 	   */
-	  public static String bitacoraToString(Bitacora pBitacora, String pTipoSeparador) {
+	  public static String bitacoraToString(BitacoraXML pBitacora, String pTipoSeparador) {
 		String resultado = "";
 		for(Registro registro: pBitacora.registros){
 		System.out.println("HOLAAA" + pBitacora.registros.get(0).fecha);
@@ -155,7 +155,7 @@ public class utilBitacora {
 	   * @return
 	   * @throws IOException
 	   */
-	  public static Bitacora leerBitacora(String pTipoArchivo) throws IOException {
+	  public static BitacoraXML leerBitacora(String pTipoArchivo) throws IOException {
 		if(pTipoArchivo.equals("csv")) {
 			return leerInformacionBitacora("csv", ",");
 		}
@@ -170,9 +170,9 @@ public class utilBitacora {
 	   * @return
 	   * @throws IOException
 	   */
-	  public static Bitacora leerInformacionBitacora(String pTipoArchivo,String pTipoSeparador) throws IOException {
+	  public static BitacoraXML leerInformacionBitacora(String pTipoArchivo,String pTipoSeparador) throws IOException {
 	    BufferedReader buffered = new BufferedReader(new FileReader(filepath+"."+pTipoArchivo));
-	    Bitacora bitacora = new Bitacora();
+	    BitacoraXML bitacora = new BitacoraXML();
 	    String linea = "";
 	     while((linea = buffered.readLine())!= null) {
 	       String[] resultado = linea.split(pTipoSeparador) ;
@@ -192,7 +192,7 @@ public class utilBitacora {
 	   * @param pBitacora
 	   * @return
 	   */
-	public static Bitacora filtrarBitacora(String pCriterioBitacora,Bitacora pBitacora,String pFechaHoy){
+	public static BitacoraXML filtrarBitacora(String pCriterioBitacora,BitacoraXML pBitacora,String pFechaHoy){
 		System.out.println("Bitacora que manda");
 		if(pCriterioBitacora.equals("registros de hoy")) {
 			System.out.println("Si entro a hoy ");
@@ -219,7 +219,7 @@ public class utilBitacora {
 	   * @param pBitacora
 	   * @return
 	   */
-	  public static Bitacora determinarFuenteBitacora(String pFuenteBitacora) throws IOException, ParserConfigurationException, SAXException, JAXBException{
+	  public static BitacoraXML determinarFuenteBitacora(String pFuenteBitacora) throws IOException, ParserConfigurationException, SAXException, JAXBException{
 		if(pFuenteBitacora.equals("csv")) {
 	      return utilBitacora.leerBitacora("csv");
 	    } 
