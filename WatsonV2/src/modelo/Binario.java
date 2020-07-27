@@ -76,11 +76,17 @@ public class Binario extends Cifrador{
 	    if(pCambio.length()==5){
 	      return pCambio;
 	    }else{
-	      while(pCambio.length()<5){
-	    	  pCambio = "0" + pCambio;
-	      }
-	      return pCambio;
+	      return cantBinario(pCambio);
 	    }
 	  }
-
+	  
+	  private String cantBinario(String pCambio) {
+		  while(pCambio.length()<5){
+	    	  pCambio = "0" + pCambio;
+	      }
+	      return pCambio; 
+	}
 }
+
+
+

@@ -1,5 +1,6 @@
 package worshop.chat;
 
+import java.io.FileWriter;
 import java.io.InputStream;
 import factory.CifradorFactory;
 import modelo.Cifrador;
@@ -29,6 +30,11 @@ import com.ibm.watson.developer_cloud.assistant.v1.model.MessageOptions;
 import com.ibm.watson.developer_cloud.assistant.v1.model.MessageResponse;
 import com.ibm.watson.developer_cloud.assistant.v1.model.RuntimeEntity;
 import com.ibm.watson.developer_cloud.service.security.IamOptions;
+import com.opencsv.CSVWriter;
+
+import modelo.Bitacora;
+import Archivos.CSV;
+import Archivos.TXT;
 
 
 @Path("/chatservice")
@@ -41,15 +47,19 @@ private String tipoFinal;
 	private String passwordDB;
 	private String apiKey = "Qso2rLcZLbpPhJhCXmH4Tfw9fgEyoGjmuCgNoSazZRHS";
 	private String assistantURL = "https://api.us-south.assistant.watson.cloud.ibm.com/instances/b9d3ad33-7e3e-46af-b799-54828842c510";
-	private static String workspaceId = "96ed91ec-779c-476d-8c1c-ca8a508a32fd";
+	private static String workspaceId = "9f06737a-5357-4846-b257-53ea2c62ee67";
+	
+	
 	
 	public ChatService(){
 		try {
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
+	  
 
 	@GET
 	@Produces("application/json")
@@ -67,6 +77,8 @@ private String tipoFinal;
 		CifradorFactory factory = new CifradorFactory();
 		Cifrador cifrador;
 		String respuestaParam;
+		
+		
 		
 			
 		try {
@@ -90,12 +102,76 @@ private String tipoFinal;
 			String textoCompleto = (String) ServiciosChat.cont.get("completo");
 			ServiciosChat.completo = textoCompleto;
 			
+			String tipoBitacora = (String) ServiciosChat.cont.get("tipoBitacora");
+			ServiciosChat.tipoBitacora = tipoBitacora;
+			
+			String opcionBitacora = (String) ServiciosChat.cont.get("opcionBitacora");
+			ServiciosChat.opcionBitacora = opcionBitacora;
+			
+			String textoBitacora = (String) ServiciosChat.cont.get("textoBitacora");
+			ServiciosChat.textoBitacora = textoBitacora;
+			
+			String realizaAccion = (String) ServiciosChat.cont.get("cifrar");
+			ServiciosChat.realizoAccion = realizaAccion;
+	
 		} catch (Exception e) {
 			
 		}
 		
+		 
+		if(ServiciosChat.tipoBitacora != null){
+			
+			if(ServiciosChat.tipoBitacora.equals("csv")) {
+				
+				if(ServiciosChat.opcionBitacora != null) {
+					
+					if(ServiciosChat.opcionBitacora.equals("1")) {
+						ServiciosChat.textoBitacora = CSV.leerFecha();
+						context.put("textoBitacora", ServiciosChat.textoBitacora);
+						
+						} else if (ServiciosChat.opcionBitacora.equals("2")){
+							ServiciosChat.textoBitacora = CSV.leerAcciones("codificar");
+							context.put("textoBitacora", ServiciosChat.textoBitacora);
+						
+							} else if (ServiciosChat.opcionBitacora.equals("3")){
+								ServiciosChat.textoBitacora = CSV.leerAcciones("decodificar");
+								context.put("textoBitacora", ServiciosChat.textoBitacora);
+						
+								} else {
+									ServiciosChat.textoBitacora = CSV.leerCsv();
+									context.put("textoBitacora", ServiciosChat.textoBitacora);
+									
+					}
+				}
+			} else if(ServiciosChat.tipoBitacora.equals("txt")) {
+			
+			if(ServiciosChat.opcionBitacora != null) {
+				
+				if(ServiciosChat.opcionBitacora.equals("1")) {
+					ServiciosChat.textoBitacora = TXT.leerFechaTxt();
+					context.put("textoBitacora", ServiciosChat.textoBitacora);
+					
+					} else if (ServiciosChat.opcionBitacora.equals("2")){
+						ServiciosChat.textoBitacora = TXT.leerAccionesTxt("codificar");
+						context.put("textoBitacora", ServiciosChat.textoBitacora);
+					
+						} else if (ServiciosChat.opcionBitacora.equals("3")){
+							ServiciosChat.textoBitacora = TXT.leerAccionesTxt("decodificar");
+							context.put("textoBitacora", ServiciosChat.textoBitacora);
+					
+							} else {
+								ServiciosChat.textoBitacora = TXT.leerTxt();
+								context.put("textoBitacora", ServiciosChat.textoBitacora);
+								
+				}
+			}
+		}
+	}
+		
 		if(ServiciosChat.valorTipo != null) {
 			try {
+				
+				
 				cifrador = factory.crearCifrador(ServiciosChat.valorTipo);
 				String texto = ServiciosChat.pedirParams(cifrador);
 				System.out.println(texto);
@@ -113,7 +189,11 @@ private String tipoFinal;
 						System.out.println(ServiciosChat.textoLISTO);
 						context.put("textoFinal", ServiciosChat.textoLISTO);
 						ServiciosChat.parametros.clear();
+							CSV.agregarBitacora(CSV.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
+							TXT.agregarBitacora(TXT.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
+						
 					} 
+						
 				}
 					else if (ServiciosChat.completo != null) {
 						System.out.println("Todo el texto: " + ServiciosChat.completo);
@@ -133,8 +213,10 @@ private String tipoFinal;
 						}
 						ServiciosChat.textoLISTO = ServiciosChat.realizarAccion(cifrador);
 						context.put("textoCompleto", ServiciosChat.textoLISTO);
-						ServiciosChat.parametros.clear();				
-				
+						ServiciosChat.parametros.clear();
+						System.out.println("2do");
+						CSV.agregarBitacora(CSV.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
+						TXT.agregarBitacora(TXT.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
 					}
 			} catch (InstantiationException e) {
 				// TODO Auto-generated catch block
@@ -196,6 +278,8 @@ private String tipoFinal;
 			object.put("context", assistantResponse.getContext());
 			return object;
 	     }
+    
+    
    
 	
 }

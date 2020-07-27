@@ -18,7 +18,7 @@ public abstract class Transposicion extends Cifrador {
 		return invertir(pTexto);
 	}
 	
-	public abstract String invertir(String pTexto);
+	protected abstract String invertir(String pTexto);
 	
 	public final String invertirUnTexto(String texto){
 		String textoInvertido = "";

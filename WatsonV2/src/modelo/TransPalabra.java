@@ -3,7 +3,7 @@ package modelo;
 public class TransPalabra extends Transposicion {
 
 	@Override
-	public String invertir(String pTexto) {
+	protected String invertir(String pTexto) {
 		  String textoInvertido = "";
 		    String[] palabras = pTexto.split("\\s+");
 		      
