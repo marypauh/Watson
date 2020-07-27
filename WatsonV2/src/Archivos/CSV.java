@@ -17,18 +17,17 @@ import java.util.Scanner;
 import com.opencsv.CSVReader;
 
 import modelo.Bitacora;
-import modelo.BitacoraXML;
-import modelo.Registro;
 import worshop.chat.ServiciosChat;
 
 
-public class CSV {
+public class CSV { 
 	
-	private static File archivo = new File("C:\\Users\\personal\\Documents\\GitHub\\Watson\\WatsonV2\\src\\Bitacora.csv");	
+	private static File archivo = new File("C:\\Users\\personal\\Desktop\\Bitacora.csv");
 	public static ArrayList<Bitacora> bitacoras = new ArrayList<Bitacora>();
 	
 	public static void agregarBitacora(ArrayList<Bitacora> bitacoras, String pFecha, String pHora, String pAccion, String pTexto) {
-			Bitacora bit = new Bitacora(pFecha,pHora,pAccion,pTexto); 
+		bitacoras.clear();	
+		Bitacora bit = new Bitacora(pFecha,pHora,pAccion,pTexto); 
 			bitacoras.add(bit);
 			crearCsv(bitacoras);
 			bitacoras.clear();
@@ -127,5 +126,5 @@ public class CSV {
 		}
 	}
 
-		
+	
 }

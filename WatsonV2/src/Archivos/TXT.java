@@ -17,22 +17,21 @@ import java.util.Scanner;
 import com.opencsv.CSVReader;
 
 import modelo.Bitacora;
-import modelo.BitacoraXML;
-import modelo.Registro;
 import worshop.chat.ServiciosChat;
 
 
 public class TXT {
 	
 	private static int contador =0;
-	private static File archivo = new File("C:\\Users\\personal\\Documents\\GitHub\\Watson\\WatsonV2\\src\\Bitacora.csv");
+	private static File archivo = new File("C:\\Users\\personal\\Desktop\\Bitacora.txt");
 	public static ArrayList<Bitacora> bitacoras = new ArrayList<Bitacora>();
 	
 	public static void agregarBitacora(ArrayList<Bitacora> bitacoras, String pFecha, String pHora, String pAccion, String pTexto) {
-			Bitacora bit = new Bitacora(pFecha,pHora,pAccion,pTexto); 
+		bitacoras.clear();	
+		Bitacora bit = new Bitacora(pFecha,pHora,pAccion,pTexto); 
 			bitacoras.add(bit);
 			crearTxt(bitacoras);
-			bitacoras.clear(); 
+			bitacoras.clear();
 	}
 	
 	private static void crearTxt(ArrayList<Bitacora> bitacoras) { 
@@ -71,7 +70,7 @@ public class TXT {
 		
 		while((fila = csvReader.readNext()) != null) {
 			Bitacora bit = new Bitacora(fila[0],fila[1],fila[2],fila[3]);
-			texto += bit.getFecha() + " " + bit.getHora() + " " + bit.getAccion() + " " + bit.getTexto()  + "\n";
+			texto += bit.getFecha() + ", " + bit.getHora() + ", " + bit.getAccion() + ", " + bit.getTexto()  + "\n";
 			System.out.println(bit.getFecha() + " " + bit.getHora() + " " + bit.getAccion() + " " + bit.getTexto());
 			bitacoras.clear();
 			bitacoras.add(bit);
@@ -88,7 +87,7 @@ public class TXT {
 		while((fila = csvReader.readNext()) != null) {
 			Bitacora b = new Bitacora(fila[0],fila[1],fila[2],fila[3]);
 			if(b.getAccion().equals(tipo)) {
-				texto += b.getFecha() + " " + b.getHora() + " " + b.getAccion() + " " + b.getTexto() + "\n";
+				texto += b.getFecha() + ", " + b.getHora() + ", " + b.getAccion() + ", " + b.getTexto() + "\n";
 				System.out.println(b.getFecha() + " " + b.getHora() + " " + b.getAccion() + " " + b.getTexto());
 			}
 		bitacoras.clear();
@@ -107,7 +106,7 @@ public class TXT {
 			Bitacora b = new Bitacora(fila[0],fila[1],fila[2],fila[3]);
 			System.out.println("Fecha");
 			if(compararFechas(b.getFecha())) {
-				texto += b.getFecha() + " " + b.getHora() + " " + b.getAccion() + " " + b.getTexto() + "\n";
+				texto += b.getFecha() + ", " + b.getHora() + ", " + b.getAccion() + ", " + b.getTexto() + "\n";
 				System.out.println(b.getFecha() + " " + b.getHora() + " " + b.getAccion() + " " + b.getTexto());
 			}
 		bitacoras.clear();
@@ -123,6 +122,12 @@ public class TXT {
 		} else {
 			return false;
 			
-		}	
+		}
 	}
+	
+	
+	
+
+
+	
 }

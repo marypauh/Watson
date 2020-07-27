@@ -1,5 +1,6 @@
 package modelo;
 
+
 import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -44,11 +45,11 @@ public class BitacoraXML {
 			System.out.println("La accion en" + j +"es " + registros.get(j).getFecha());
 			}
 		
-		/*for(Registro registro : registros) {
+		for(Registro registro : registros) {
 			if (registro.fecha.equals(pFecha) && registro.fecha != null) {
 				resultado.add(registro);
 			}
-		}*/
+		}
 		BitacoraXML bitacora = new BitacoraXML();
 		bitacora.registros = resultado;
 		return bitacora;

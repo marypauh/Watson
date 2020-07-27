@@ -32,6 +32,7 @@ import com.ibm.watson.developer_cloud.assistant.v1.model.RuntimeEntity;
 import com.ibm.watson.developer_cloud.service.security.IamOptions;
 import com.opencsv.CSVWriter;
 
+import modelo.Bitacora;
 import modelo.BitacoraXML;
 import Archivos.CSV;
 import Archivos.TXT;
@@ -79,7 +80,6 @@ private String tipoFinal;
 		CifradorFactory factory = new CifradorFactory();
 		Cifrador cifrador;
 		String respuestaParam;
-		
 		
 		
 			
@@ -139,7 +139,7 @@ private String tipoFinal;
 								ServiciosChat.textoBitacora = CSV.leerAcciones("decodificar");
 								context.put("textoBitacora", ServiciosChat.textoBitacora);
 						
-								} else {
+								} else { 
 									ServiciosChat.textoBitacora = CSV.leerCsv();
 									context.put("textoBitacora", ServiciosChat.textoBitacora);
 									
@@ -167,6 +167,35 @@ private String tipoFinal;
 								
 				}
 			}
+		} else {
+			if(ServiciosChat.opcionBitacora != null) {
+				
+				if(ServiciosChat.opcionBitacora.equals("1")) {
+					BitacoraXML bit = new BitacoraXML();
+					bit = bit.getRegistrosHoy(ServiciosChat.fijarFecha());
+					ServiciosChat.textoBitacora = XML.bitacoraToStringXML(bit);
+					context.put("textoBitacora", ServiciosChat.textoBitacora);
+					
+					} else if (ServiciosChat.opcionBitacora.equals("2")){
+						BitacoraXML bit = new BitacoraXML();
+						bit = bit.getRegistrosCodificar();
+						ServiciosChat.textoBitacora = XML.bitacoraToStringXML(bit);
+						context.put("textoBitacora", ServiciosChat.textoBitacora);
+					
+						} else if (ServiciosChat.opcionBitacora.equals("3")){
+							BitacoraXML bit = new BitacoraXML();
+							bit = bit.getRegistrosDecodificar();
+							ServiciosChat.textoBitacora = XML.bitacoraToStringXML(bit);
+							context.put("textoBitacora", ServiciosChat.textoBitacora);
+					
+							} else {
+								BitacoraXML bit = new BitacoraXML();
+								bit = XML.leerXML();
+								ServiciosChat.textoBitacora = XML.bitacoraToStringXML(bit);
+								context.put("textoBitacora", ServiciosChat.textoBitacora);
+								
+				}
+			}
 		}
 	}
 		
@@ -187,11 +216,14 @@ private String tipoFinal;
 				
 					if (ServiciosChat.textoRespuesta != null) {
 						System.out.println("TEXTO: " + ServiciosChat.textoRespuesta + "Cifrador: " + cifrador);
-						ServiciosChat.textoLISTO = DecoradorArchivos.agregar(ServiciosChat.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO, cifrador);
+						ServiciosChat.textoLISTO = ServiciosChat.realizarAccion(cifrador);
 						System.out.println(ServiciosChat.textoLISTO);
+						System.out.println(ServiciosChat.bitacoras.toString());
 						context.put("textoFinal", ServiciosChat.textoLISTO);
 						ServiciosChat.parametros.clear();
-						
+							CSV.agregarBitacora(CSV.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
+							TXT.agregarBitacora(TXT.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
+							XML.agregarBitacoras(ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
 						
 					} 
 						
@@ -216,11 +248,8 @@ private String tipoFinal;
 						context.put("textoCompleto", ServiciosChat.textoLISTO);
 						ServiciosChat.parametros.clear();
 						System.out.println("2do");
-						if (ServiciosChat.textoLISTO != null) {
-							CSV.agregarBitacora(CSV.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
-							TXT.agregarBitacora(TXT.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
-							XML.agregarBitacoras(ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
-						}
+					//	CSV.agregarBitacora(CSV.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
+						TXT.agregarBitacora(TXT.bitacoras, ServiciosChat.fijarFecha(), ServiciosChat.fijarHora(), ServiciosChat.accion, ServiciosChat.textoLISTO);
 					}
 			} catch (InstantiationException e) {
 				// TODO Auto-generated catch block
@@ -282,5 +311,8 @@ private String tipoFinal;
 			object.put("context", assistantResponse.getContext());
 			return object;
 	     }
+    
+    
+   
 	
 }

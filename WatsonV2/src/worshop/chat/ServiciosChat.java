@@ -11,9 +11,6 @@ import java.util.regex.Pattern;
 
 import com.ibm.watson.developer_cloud.assistant.v1.model.Context;
 
-import Archivos.CSV;
-import Archivos.TXT;
-import Archivos.XML;
 import factory.CifradorFactory;
 import modelo.Bitacora;
 import modelo.Cifrador;
@@ -34,6 +31,7 @@ public class ServiciosChat {
 	static String textoBitacora;
 	static String realizoAccion;
 	public static ArrayList<Bitacora> bitacoras = new ArrayList<Bitacora>();
+	
 	
 	public static String determinarHora() {
 		int hora = obtenerHora();
@@ -113,7 +111,8 @@ public class ServiciosChat {
 		    } else {
 		    	respuesta  = "El texto decodificado es: " + pCifrador.decodificar(texto);
 		    }
-		    return respuesta;	
+		    return respuesta;
+		    	
 		  }
 		 
 		 public static String obtenerTexto(String pTexto) {
