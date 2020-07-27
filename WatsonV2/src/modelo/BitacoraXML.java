@@ -20,7 +20,6 @@ public class BitacoraXML {
 	}
 	
 	public void agregarRegistro(Registro pRegistro) {
-		System.out.println("SI ENTRE A AGREGAR REGISTRO");
 			if (existeRegistro(pRegistro) == false) {
 				registros.add(pRegistro);
 			}
@@ -29,7 +28,6 @@ public class BitacoraXML {
 	private boolean existeRegistro(Registro pRegistro) {
 		boolean existe = false;
 		for(int j = 0; j < registros.size();j++) {
-			System.out.println("SON IGUALES"+ registros.get(j).equals(pRegistro));
 			if (registros.get(j).equals(pRegistro)) {
 				System.out.println("Es igual " + registros.get(j).getTexto() +" === " + pRegistro.getTexto());
 				existe = true;
