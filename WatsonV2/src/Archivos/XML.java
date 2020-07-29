@@ -18,10 +18,10 @@ import modelo.Registro;
 import worshop.chat.ServiciosChat;
 
 public class XML {
-	public static String filepath = "C:\\Users\\personal\\Desktop\\Bitacora";
+	public static String filepath = "C:\\Users\\raque\\OneDrive\\Desktop\\bitacora.xml";
 
 	public static void crearBitacoraXML(BitacoraXML pBitacora) throws JAXBException {
-		File file = new File(filepath + ".xml");
+		File file = new File(filepath);
 		JAXBContext jaxbContext = JAXBContext.newInstance(BitacoraXML.class);
 		Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 		jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -29,7 +29,7 @@ public class XML {
 	}
 
 	  public static BitacoraXML leerXML() throws ParserConfigurationException, SAXException, IOException, JAXBException{
-		    File file = new File(filepath+".xml");
+		    File file = new File(filepath);
 		    JAXBContext jaxbContext = JAXBContext.newInstance(BitacoraXML.class);
 		    Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 		    BitacoraXML bitacora = (BitacoraXML) jaxbUnmarshaller.unmarshal(file);
@@ -42,9 +42,7 @@ public class XML {
 	   * @throws IOException
 	   */
 	  public static void validarArchivos() throws JAXBException, IOException {
-	    File xml = new File(filepath+".xml");
-	    File csv = new File(filepath+".csv");
-	    File txt = new File(filepath+".txt");
+	    File xml = new File(filepath);
 	    BitacoraXML bitacora = new BitacoraXML();
 	    if(!xml.exists()) {
 	      crearBitacoraXML(bitacora);

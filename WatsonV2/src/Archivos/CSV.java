@@ -22,7 +22,7 @@ import worshop.chat.ServiciosChat;
 
 public class CSV { 
 	
-	private static File archivo = new File("C:\\Users\\personal\\Desktop\\Bitacora.csv");
+	private static File archivo = new File("C:\\Users\\raque\\OneDrive\\Desktop\\bitacora.csv");
 	public static ArrayList<Bitacora> bitacoras = new ArrayList<Bitacora>();
 	
 	public static void agregarBitacora(ArrayList<Bitacora> bitacoras, String pFecha, String pHora, String pAccion, String pTexto) {

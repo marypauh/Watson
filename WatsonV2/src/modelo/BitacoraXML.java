@@ -46,7 +46,7 @@ public class BitacoraXML {
 			}
 		
 		for(Registro registro : registros) {
-			if (registro.fecha.equals(pFecha) && registro.fecha != null) {
+			if (registro.fecha.equals(pFecha)) {
 				resultado.add(registro);
 			}
 		}
@@ -79,7 +79,7 @@ public class BitacoraXML {
 
 		for(int i = 0; i < registros.size();i++) {
 			System.out.println("Aqui entro a la" + registros.get(i).getAccion().equals("decodificar"));
-			if (registros.get(i).getAccion().equals("decodificat")) {
+			if (registros.get(i).getAccion().equals("decodificar")) {
 				System.out.println("Aqui entro a la compacaracion de condificar");
 				bitacora.registros.add(registros.get(i));
 			}

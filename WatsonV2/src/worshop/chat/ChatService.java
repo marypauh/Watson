@@ -170,27 +170,24 @@ private String tipoFinal;
 		} else {
 			if(ServiciosChat.opcionBitacora != null) {
 				
+				BitacoraXML bit = new BitacoraXML();
+				bit = XML.leerXML();
 				if(ServiciosChat.opcionBitacora.equals("1")) {
-					BitacoraXML bit = new BitacoraXML();
-					bit = bit.getRegistrosHoy(ServiciosChat.fijarFecha());
-					ServiciosChat.textoBitacora = XML.bitacoraToStringXML(bit);
+					BitacoraXML bitFiltrado = bit.getRegistrosHoy(ServiciosChat.fijarFecha());
+					ServiciosChat.textoBitacora = XML.bitacoraToStringXML(bitFiltrado);
 					context.put("textoBitacora", ServiciosChat.textoBitacora);
 					
 					} else if (ServiciosChat.opcionBitacora.equals("2")){
-						BitacoraXML bit = new BitacoraXML();
-						bit = bit.getRegistrosCodificar();
-						ServiciosChat.textoBitacora = XML.bitacoraToStringXML(bit);
+						BitacoraXML bitFiltrado = bit.getRegistrosCodificar();
+						ServiciosChat.textoBitacora = XML.bitacoraToStringXML(bitFiltrado);
 						context.put("textoBitacora", ServiciosChat.textoBitacora);
 					
 						} else if (ServiciosChat.opcionBitacora.equals("3")){
-							BitacoraXML bit = new BitacoraXML();
-							bit = bit.getRegistrosDecodificar();
-							ServiciosChat.textoBitacora = XML.bitacoraToStringXML(bit);
+							BitacoraXML bitFiltrado = bit.getRegistrosDecodificar();
+							ServiciosChat.textoBitacora = XML.bitacoraToStringXML(bitFiltrado);
 							context.put("textoBitacora", ServiciosChat.textoBitacora);
 					
 							} else {
-								BitacoraXML bit = new BitacoraXML();
-								bit = XML.leerXML();
 								ServiciosChat.textoBitacora = XML.bitacoraToStringXML(bit);
 								context.put("textoBitacora", ServiciosChat.textoBitacora);
 								
