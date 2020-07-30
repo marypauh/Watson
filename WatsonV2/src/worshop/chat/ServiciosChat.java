@@ -53,6 +53,8 @@ public class ServiciosChat {
 		Calendar c = Calendar.getInstance(tz);
 		return c.get(Calendar.HOUR_OF_DAY);
 	  }
+		  
+
 	
 	  public static String pedirParams(Cifrador cifrador) {
 			String parametro = "";
@@ -143,14 +145,18 @@ public class ServiciosChat {
 		 }
 	
 	public static String fijarFecha() {
-		Date date = new Date();
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.HOUR, -6);
+		Date date = c.getTime();
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String fecha = dateFormat.format(date);
 		return fecha;
 	}
 	
 	public static String fijarHora() {
-		Date date = new Date();
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.HOUR, -6);
+		Date date = c.getTime();
 		DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 		String hora = dateFormat.format(date);
 		return hora;
