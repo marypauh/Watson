@@ -37,7 +37,6 @@ import modelo.BitacoraXML;
 import Archivos.CSV;
 import Archivos.TXT;
 import Archivos.XML;
-import decorador.DecoradorArchivos;
 
 
 @Path("/chatservice")
@@ -113,8 +112,7 @@ private String tipoFinal;
 			String textoBitacora = (String) ServiciosChat.cont.get("textoBitacora");
 			ServiciosChat.textoBitacora = textoBitacora;
 			
-			String realizaAccion = (String) ServiciosChat.cont.get("cifrar");
-			ServiciosChat.realizoAccion = realizaAccion;
+			
 	
 		} catch (Exception e) {
 			

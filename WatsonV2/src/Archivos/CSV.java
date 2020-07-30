@@ -80,14 +80,14 @@ public class CSV {
 		
 	}
 	
-	public static String leerAcciones(String tipo) throws IOException {
+	public static String leerAcciones(String pTipo) throws IOException {
 		CSVReader csvReader = new CSVReader(new FileReader(archivo));
 		String[] fila = null;
 		String texto = "";
 		
 		while((fila = csvReader.readNext()) != null) {
 			Bitacora b = new Bitacora(fila[0],fila[1],fila[2],fila[3]);
-			if(b.getAccion().equals(tipo)) {
+			if(b.getAccion().equals(pTipo)) {
 				texto += b.getFecha() + " " + b.getHora() + " " + b.getAccion() + " " + b.getTexto()  + "\n";
 				System.out.println(b.getFecha() + " " + b.getHora() + " " + b.getAccion() + " " + b.getTexto());
 			}

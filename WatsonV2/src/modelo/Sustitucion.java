@@ -23,6 +23,7 @@ public abstract class Sustitucion extends Cifrador {
 		  
 	protected abstract String intercambiarPalabra(String pPalabra);
 	
+	
 	public final String codificar(String pTexto) {
 		this.esCodificar = true;
 		return sustituirTexto(pTexto);

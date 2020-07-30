@@ -18,18 +18,17 @@ import util.AnalizadorTono;
 
 public class ServiciosChat {
 	
-	static Context cont;
-	static ArrayList<String> parametros = new ArrayList<String>();
-	static String valorTipo;
-	static String parametro;
-	static String accion;
-	static String textoRespuesta;
-	static String textoLISTO;
-	static String completo;
-	static String tipoBitacora;
-	static String opcionBitacora;
-	static String textoBitacora;
-	static String realizoAccion;
+	public static Context cont;
+	public static ArrayList<String> parametros = new ArrayList<String>();
+	public static String valorTipo;
+	public static String parametro;
+	public static String accion;
+	public static String textoRespuesta;
+	public static String textoLISTO;
+	public static String completo;
+	public static String tipoBitacora;
+	public static String opcionBitacora;
+	public static String textoBitacora;
 	public static ArrayList<Bitacora> bitacoras = new ArrayList<Bitacora>();
 	
 	

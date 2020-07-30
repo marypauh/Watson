@@ -2,28 +2,28 @@ package util;
 
 public class Utilitario {
 	  
-	  public int convertirLetraASCII(char letra){
-	    return (int)letra; //devuelve el aascii de la letra
+	  public int convertirLetraASCII(char pLetra){
+	    return (int)pLetra; //devuelve el aascii de la letra
 	  }
 	  
-	  public char convertirASCIILetra(int codigo){
-	    return (char)codigo; //devuelve la letra correspondiente
+	  public char convertirASCIILetra(int pCodigo){
+	    return (char)pCodigo; //devuelve la letra correspondiente
 	  }
 	  
-	  public char validarCodigoASCIICodificar(int codigo){
-	    if(codigo > 122){
-	      int diferencia = codigo - 122;
-	      codigo = 96 + diferencia;
+	  public char validarCodigoASCIICodificar(int pCodigo){
+	    if(pCodigo > 122){
+	      int diferencia = pCodigo - 122;
+	      pCodigo = 96 + diferencia;
 	    }
-	    return convertirASCIILetra(codigo);    
+	    return convertirASCIILetra(pCodigo);    
 	  }
 	  
-	  public char validarCodigoASCIIDecodificar(int codigo){
-	    if(codigo < 97){
-	      int diferencia = codigo - 97;
-	      codigo = 123 - diferencia;
+	  public char validarCodigoASCIIDecodificar(int pCodigo){
+	    if(pCodigo < 97){
+	      int diferencia = pCodigo - 97;
+	      pCodigo = 123 - diferencia;
 	    }    
-	    return convertirASCIILetra(codigo);
+	    return convertirASCIILetra(pCodigo);
 	  }
 	  
 }

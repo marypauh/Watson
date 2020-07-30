@@ -20,10 +20,10 @@ public abstract class Transposicion extends Cifrador {
 	
 	protected abstract String invertir(String pTexto);
 	
-	public final String invertirUnTexto(String texto){
+	public final String invertirUnTexto(String pTexto){
 		String textoInvertido = "";
-		for (int i = texto.length()-1; i >= 0; i--){
-		  textoInvertido += texto.charAt(i);
+		for (int i = pTexto.length()-1; i >= 0; i--){
+		  textoInvertido += pTexto.charAt(i);
 		}
 		 return textoInvertido;
 		}

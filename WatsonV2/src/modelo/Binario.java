@@ -35,20 +35,20 @@ public class Binario extends Cifrador{
 	    return textoEnBinario;
 	  }
 	  
-	  private String aTexto(String texto) {
+	  private String aTexto(String pTexto) {
 	    String binarioEnTexto = "";
-	    String[] textoSeparado = texto.split(" ");
+	    String[] textoSeparado = pTexto.split(" ");
 	    for (String separado : textoSeparado) {
 	    	binarioEnTexto += esEspacio(separado);//verificar si es palabra o espacio
 	    }
 	    return binarioEnTexto;
 	  }
 	  
-	  private char esEspacio(String texto) {
-	    if(texto.equals("*")){
+	  private char esEspacio(String pTexto) {
+	    if(pTexto.equals("*")){
 	      return ' ';
 	    } else {
-	      return binarioALetra(texto);
+	      return binarioALetra(pTexto);
 	    }
 	  }
 	  

@@ -3,7 +3,7 @@ package modelo;
 import java.util.ArrayList;
 
 public class Cesar extends Sustitucion{
-	public int desplazamiento;
+	private int desplazamiento;
 
 	@Override
 	public ArrayList<String> getParams() {
@@ -20,11 +20,11 @@ public class Cesar extends Sustitucion{
 	}
 
 	@Override
-	protected String intercambiarPalabra(String palabra) {
+	protected String intercambiarPalabra(String pPalabra) {
 		String nuevaPalabra = "";
 		char ch;
-	    for(int i = 0; i <= palabra.length()-1; i++){
-	    	nuevaPalabra += codificarLetra(Character.toLowerCase(palabra.charAt(i))); // sustitur cada letra de la palabra segun desplazamiento
+	    for(int i = 0; i <= pPalabra.length()-1; i++){
+	    	nuevaPalabra += codificarLetra(Character.toLowerCase(pPalabra.charAt(i))); // sustitur cada letra de la palabra segun desplazamiento
 	    }
 	    return nuevaPalabra;
 	  }
