@@ -30,7 +30,6 @@ public class BitacoraXML {
 		boolean existe = false;
 		for(int j = 0; j < registros.size();j++) {
 			if (registros.get(j).equals(pRegistro)) {
-				System.out.println("Es igual " + registros.get(j).getTexto() +" === " + pRegistro.getTexto());
 				existe = true;
 				return existe;
 			}
@@ -40,10 +39,6 @@ public class BitacoraXML {
 	
 	public BitacoraXML getRegistrosHoy(String pFecha){
 		ArrayList<Registro> resultado = new  ArrayList<Registro>();
-		
-		for(int j = 0; j < registros.size();j++) {
-			System.out.println("La accion en" + j +"es " + registros.get(j).getFecha());
-			}
 		
 		for(Registro registro : registros) {
 			if (registro.fecha.equals(pFecha)) {
@@ -58,10 +53,6 @@ public class BitacoraXML {
 	public BitacoraXML getRegistrosCodificar(){
 		BitacoraXML bitacora = new BitacoraXML();
 
-		for(int j = 0; j < registros.size();j++) {
-			System.out.println("La accion en" + j +"es " + registros.get(j).getAccion());
-			}
-
 		for(int i = 0; i < registros.size();i++) {
 			if (registros.get(i).getAccion().equals("codificar")) {
 				bitacora.registros.add(registros.get(i));
@@ -72,15 +63,8 @@ public class BitacoraXML {
 	
 	public BitacoraXML getRegistrosDecodificar(){
 		BitacoraXML bitacora = new BitacoraXML();
-
-		for(int j = 0; j < registros.size();j++) {
-			System.out.println("La accion en" + j +"es " + registros.get(j).getAccion());
-			}
-
 		for(int i = 0; i < registros.size();i++) {
-			System.out.println("Aqui entro a la" + registros.get(i).getAccion().equals("decodificar"));
 			if (registros.get(i).getAccion().equals("decodificar")) {
-				System.out.println("Aqui entro a la compacaracion de condificar");
 				bitacora.registros.add(registros.get(i));
 			}
 		}
