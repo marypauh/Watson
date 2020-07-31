@@ -45,16 +45,32 @@ public class Llave extends Sustitucion {
 		    
 		  }
 		  
-		  private int validarTamanoCodigo(int pCodigo){
-		    if(this.esCodificar && pCodigo > 25){
-		      return pCodigo -=26;    
-		    }
-		    if(!this.esCodificar && pCodigo < 0){
+		  private int validarTamanoCodigo(int pCodigo){ 
+			if (validarMayor(pCodigo)) {
+				return pCodigo -=26;
+			}
+		    if(validarNegativo(pCodigo)){
 		      return pCodigo += 26;    
-		    }  
+		    } 
+		    
 		    return pCodigo;
 		  }
 		  
+		  
+		  private boolean validarMayor(int pCodigo) {
+			  if (this.esCodificar && pCodigo > 25) {
+				  return true;
+			  }
+			  return false;
+		  }
+		  
+		   
+		  private boolean validarNegativo(int pCodigo) {
+			  if (!this.esCodificar && pCodigo < 0) {
+				  return true;
+			  }
+			  return false;
+		  }
 		  private String generarLlave(int pTamano){
 		    String nuevaLlave = "";
 		    int contador = 0;

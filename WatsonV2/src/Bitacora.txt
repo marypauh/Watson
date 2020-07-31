@@ -1,2 +1,12 @@
-26/07/2020,18:29:09,codificar,El texto codificado es: 00010 01110 01011 01110 10001 00100 10010 
-26/07/2020,18:29:51,decodificar,El texto codificado es: 43 62 23 63 61 71 21 73 21 22 53 32 
+26/07/2020,21:23:38,codificar,El texto codificado es: 10000 10100 00100 * 01011 00100 * 00011 01110 11000 
+26/07/2020,21:24:03,codificar,El texto codificado es: 10000 10100 00100 * 10101 00000 * 00000 * 10000 10100 00100 10001 00100 10001 
+31/07/2020,05:15:39,codificar,El texto codificado es: 
+31/07/2020,05:20:33,codificar,El texto codificado es: 
+31/07/2020,05:24:21,codificar,El texto codificado es: 22 82 32 62 63 74 *31 43 21 74 
+31/07/2020,05:25:20,decodificar,El texto decodificado es: buenos dias
+31/07/2020,05:26:30,codificar,El texto codificado es: v`qsuh xnmx 
+31/07/2020,05:27:47,decodificar,El texto decodificado es: byclfn dmyq 
+31/07/2020,05:39:43,codificar,El texto codificado es: vvsudm xjo` 
+31/07/2020,05:40:46,decodificar,El texto decodificado es: buenos dias 
+31/07/2020,06:05:51,codificar,El texto codificado es: vvsudm xjo` 
+31/07/2020,06:09:47,decodificar,El texto decodificado es: buenos dias 
